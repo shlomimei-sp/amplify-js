@@ -10,41 +10,32 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-import { AWS } from './Facet';
-import { ConsoleLogger as Logger } from './Logger';
-import Amplify from './Amplify';
-export * from './Facet';
-export { default as ClientDevice } from './ClientDevice';
-export { ConsoleLogger, ConsoleLogger as Logger } from './Logger';
-export * from './Errors';
-export { default as Hub } from './Hub';
-export { default as I18n } from './I18n';
-export { default as JS } from './JS';
-export { default as Signer } from './Signer';
-export { default as Parser } from './Parser';
-export { FacebookOAuth, GoogleOAuth } from './OAuthHelper';
-export * from './RNComponents';
-export { default as Credentials } from './Credentials';
-export { default as ServiceWorker } from './ServiceWorker';
-export { default as StorageHelper, MemoryStorage } from './StorageHelper';
-export { default as Platform } from './Platform';
-import Platform from './Platform';
-export var Constants = {
-    userAgent: Platform.userAgent,
-};
-export * from './constants';
+import Analytics, { AnalyticsClass, AWSPinpointProvider, AWSKinesisProvider, AmazonPersonalizeProvider, } from '@aws-amplify/analytics';
+import Auth, { AuthClass } from '@aws-amplify/auth';
+import Storage, { StorageClass } from '@aws-amplify/storage';
+import API, { APIClass, graphqlOperation } from '@aws-amplify/api';
+import PubSub, { PubSubClass } from '@aws-amplify/pubsub';
+import Cache from '@aws-amplify/cache';
+import Interactions, { InteractionsClass } from '@aws-amplify/interactions';
+import * as UI from '@aws-amplify/ui';
+import XR, { XRClass } from '@aws-amplify/xr';
+import Predictions from '@aws-amplify/predictions';
+import Amplify, { ConsoleLogger as Logger, Hub, JS, ClientDevice, Signer, I18n, ServiceWorker, } from '@aws-amplify/core';
 export default Amplify;
-export * from './Util';
-var logger = new Logger('Core');
-if (AWS['util']) {
-    AWS['util'].userAgent = function () {
-        return Constants.userAgent;
-    };
-}
-else if (AWS.config) {
-    AWS.config.update({ customUserAgent: Constants.userAgent });
-}
-else {
-    logger.warn('No AWS.config');
-}
+Amplify.Auth = Auth;
+Amplify.Analytics = Analytics;
+Amplify.API = API;
+Amplify.Storage = Storage;
+Amplify.I18n = I18n;
+Amplify.Cache = Cache;
+Amplify.PubSub = PubSub;
+Amplify.Logger = Logger;
+Amplify.ServiceWorker = ServiceWorker;
+Amplify.Interactions = Interactions;
+Amplify.UI = UI;
+Amplify.XR = XR;
+Amplify.Predictions = Predictions;
+export { Auth, Analytics, Storage, API, PubSub, I18n, Logger, Hub, Cache, JS, ClientDevice, Signer, ServiceWorker, Interactions, UI, XR, Predictions, };
+export { AuthClass, AnalyticsClass, APIClass, StorageClass, PubSubClass, InteractionsClass, XRClass, AWSPinpointProvider, AWSKinesisProvider, AmazonPersonalizeProvider, };
+export { graphqlOperation };
 //# sourceMappingURL=index.js.map
