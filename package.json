@@ -1,9 +1,10 @@
 {
 	"name": "aws-amplify",
 	"private": true,
-	"version": "0.1.30",
+	"version": "1.1.30",
 	"description": "",
 	"scripts": {
+		"postinstall": "yarn && yarn bootstrap && yarn build",
 		"setup-dev": "yarn && yarn bootstrap && yarn link-all && yarn build",
 		"bootstrap": "lerna bootstrap",
 		"test": "lerna run test --stream",
