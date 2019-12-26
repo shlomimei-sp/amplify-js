@@ -299,10 +299,9 @@ export default class Signer {
 		request.headers = request.headers || {};
 
 		// datetime string and date string
-		const dt = new Date(),
+		var dt = AWS['util']['date'].getDate(),
 			dt_str = dt.toISOString().replace(/[:\-]|\.\d{3}/g, ''),
 			d_str = dt_str.substr(0, 8);
-
 		const url_info = url.parse(request.url);
 		request.headers['host'] = url_info.host;
 		request.headers['x-amz-date'] = dt_str;
@@ -370,7 +369,10 @@ export default class Signer {
 		const body: any =
 			typeof urlOrRequest === 'object' ? urlOrRequest.body : undefined;
 
-		const now = new Date().toISOString().replace(/[:\-]|\.\d{3}/g, '');
+		const now = AWS['util']['date']
+			.getDate()
+			.toISOString()
+			.replace(/[:\-]|\.\d{3}/g, '');
 		const today = now.substr(0, 8);
 		// Intentionally discarding search
 		const { search, ...parsedUrl } = url.parse(urlToSign, true, true);
